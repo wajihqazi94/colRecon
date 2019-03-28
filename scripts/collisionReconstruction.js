@@ -68,8 +68,8 @@ geotab.addin.collisionReconstruction = function (api, state) {
 			document.getElementById("startLabel").textContent = state.translate('Start date');
 			document.getElementById("endLabel").textContent = state.translate('End date');
 			
-			searchButton.textContent = state.translate('Find Latest Collision');
-			showHistoricDevices.textContent = state.translate('Show Historic Devices');
+			/* searchButton.textContent = state.translate('Find Latest Collision');
+			showHistoricDevices.textContent = state.translate('Show Historic Devices'); */
 			
 			
             var now = new Date(),
