@@ -121,7 +121,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 resultsLimit: 1
             }, function (result) {
                 if (result.length === 0) {
-                    document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('Information about this vehicle could not be found.') + "</div>";
+                    document.getElementById("results").innerHTML = "<div class='error'>The information for this vehicle could not be found. Please try again or select another vehicle.</div>";
                     console.error("Failed to get device information for the chosen vehicle.");
                     hideWaiting();
                     return;
@@ -135,11 +135,11 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 } else if (accident.vehicleType !== "none") {
                     getAccidentFault(currentDevice.id, dateFrom, dateTo);
                 } else {
-                    document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('There is no VIN information for the selected vehicle. Please select a vehicle type and try again.') + "</div>";
+                    document.getElementById("results").innerHTML = "<div class='error'>There was no VIN information for this vehicle. Please select a vehicle type and try again.</div>";
                     hideWaiting();
                 }
             }, function (e) {
-                document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('Could not retrieve vehicle information.') + "</div>";
+                document.getElementById("results").innerHTML = "<div class='error'>There was an error getting vehicle information. Please try again.</div>";
                 console.error("Failed to get device: ", e);
                 hideWaiting();
             });
@@ -157,7 +157,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 }
 
                 if (accident.vehicleType === "none") {
-                    document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('A vehicle type could not be determined automatically for the selected vehicle. Please select a vehicle type and try again.') + "</div>";
+                    document.getElementById("results").innerHTML = "<div class='error'>The vehicle type could not be determined for this vehicle. Please select a vehicle type and try again.</div>";
                     hideWaiting();
                     return;
                 }
@@ -168,7 +168,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
                     getAccidentFault(currentDevice.id, dateFrom, dateTo);
                 }
                 else {
-                    document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('Could not retrieve VIN information.') + "</div>";
+                    document.getElementById("results").innerHTML = "<div class='error'>There was an error getting vin information. Please try again or select a vehicle type.</div>";
                     console.error("Failed to decode VIN: ", e);
                     hideWaiting();
                 }
@@ -186,7 +186,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 }
             }, function (result) {
                 if (result.length === 0) {
-                    document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('No collision was detected during this period of time.') + "</div>";
+                    document.getElementById("results").innerHTML = "<div class='error'>No collision was detected during this period of time.</div>";
                     hideWaiting();
                     return;
                 }
@@ -205,7 +205,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 accident.dateTime = new Date(latestAccidentString);
                 getSpeed(deviceId, accident.dateTime);
             }, function (e) {
-                document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('Could not retrieve collision information.') + "</div>";
+                document.getElementById("results").innerHTML = "<div class='error'>There was an error getting collision information. Please try again.</div>";
                 console.error("Failed to get fault data: ", e);
                 hideWaiting();
             });
@@ -230,7 +230,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 }
             }, function (result) {
                 if (result.length === 0) {
-                    accident.speed = state.translate('Unknown');
+                    accident.speed = "Unknown";
                     getAccelerometerData(deviceId, accidentDate);
                     return;
                 }
@@ -259,7 +259,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
 
             }, function (e) {
                 console.error("Failed to get speed log data: ", e);
-                accident.speed = state.translate('Unknown');
+                accident.speed = "Unknown";
                 getAccelerometerData(deviceId, accidentDate);
             });
         },
@@ -274,13 +274,13 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 if (result.length > 0) {
                     accident.address = result[0].formattedAddress;
                 } else {
-                    accident.address = state.translate('Address could not be rendered.');
+                    accident.address = "Address could not be rendered.";
                 }
 
                 getAccelerometerData(currentDevice.id, accident.dateTime);
             }, function (e) {
                 console.error("Failed to get address data: ", e);
-                accident.address = state.translate('Address could not be rendered.');
+                accident.address = "Address could not be rendered.";
 
                 getAccelerometerData(currentDevice.id, accident.dateTime);
             });
@@ -311,7 +311,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 }
             }]], function (result) {
                 if (result[0].length === 0 || result[1].length === 0) {
-                    document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('Could not retrieve accelerometer information.') + "</div>";
+                    document.getElementById("results").innerHTML = "<div class='error'>There was an error getting accelerometer information. Please try again.</div>";
                     console.error("No accelerometer data found; cannot continue processing results.");
                     hideWaiting();
                     return;
@@ -326,14 +326,14 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 accident.y = accident.yArray[index].data;
 
                 if (Math.abs(accident.x) < 18 && Math.abs(accident.y) < 18) {
-                    document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('No collision was detected during this period of time.') + "</div>";
+                    document.getElementById("results").innerHTML = "<div class='error'>No collision was detected during this period of time.</div>";
                     hideWaiting();
                     return;
                 }
 
                 impactLogic(accident.x, accident.y);
             }, function (e) {
-                document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('There was an error getting accelerometer information. Please try again.') + "</div>";
+                document.getElementById("results").innerHTML = "<div class='error'>There was an error getting accelerometer information. Please try again.</div>";
                 console.error("Failed to get accelerometer data: ", e);
                 hideWaiting();
             });
@@ -388,7 +388,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
             }
 
             accident.pos = accident_pos;
-            accident.imageString = "<h1>" + state.translate('Point of Impact') + "</h1><img src=https://www.geotab.com/geoimages/accident_image/" + accident.vehicleType + "/" + accident.vehicleType + accident.pos + ".png width=100% />";
+            accident.imageString = "<h1>Point of Impact</h1><img src=https://www.geotab.com/geoimages/accident_image/" + accident.vehicleType + "/" + accident.vehicleType + accident.pos + ".png width=100% />";
 
             getTrip(currentDevice.id, accident.dateTime);
         },
@@ -406,8 +406,8 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 }
             }, function (result) {
                 if (result.length === 0) {
-                    accident.trip = state.translate('Unknown');
-                    accident.driver = state.translate('Unknown Driver');
+                    accident.trip = "Unknown";
+                    accident.driver = "Unknown Driver";
                     displayResults();
                     return;
                 }
@@ -418,15 +418,15 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 accident.dayAfter = accidentAfter.toISOString();
 
                 if (result[0].driver === "UnknownDriverId") {
-                    accident.driver = state.translate('Unknown Driver');
+                    accident.driver = "Unknown Driver";
                     displayResults();
                 } else {
                     getUser(result[0].driver.id);
                 }
 
             }, function (e) {
-                accident.trip = state.translate('Unknown');
-                accident.driver = state.translate('Unknown Driver');
+                accident.trip = "Unknown";
+                accident.driver = "Unknown Driver";
                 console.error("Failed to get trip data: ", e);
                 displayResults();
             });
@@ -440,7 +440,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 }
             }, function (result) {
                 if (result.length === 0) {
-                    accident.driver = state.translate('Unknown Driver');
+                    accident.driver = "Unknown Driver";
                     displayResults();
                     return;
                 }
@@ -449,7 +449,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 displayResults();
             }, function (e) {
                 console.error("Failed to get user data: ", e);
-                accident.driver = state.translate('Unknown Driver');
+                accident.driver = "Unknown Driver";
                 displayResults();
             });
         },
@@ -525,7 +525,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
 
             api.multiCall(calls, function (data) {
                 if (data.length === 0) {
-                    document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('There was an error getting device information. Please refresh the page.') + "</div>";
+                    document.getElementById("results").innerHTML = "<div class='error'>There was an error getting device information. Please refresh the page.</div>";
                     console.error("Failed to get list of devices.");
                     hideWaiting();
                 }
@@ -536,7 +536,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 updateVehiclesCombo();
                 hideWaiting();
             }, function (e) {
-                document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('There was an error getting device information. Please refresh the page.') + "</div>";
+                document.getElementById("results").innerHTML = "<div class='error'>There was an error getting device information. Please refresh the page.</div>";
                 console.error("Failed to get list of devices: ", e);
                 hideWaiting();
             });
@@ -612,38 +612,38 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 accidentThirtyBefore = moment(accident.speedStartTime).tz(userTimezone).format("dddd, MMMM DD, YYYY hh:mm:ss a"),
                 accidentThirtyAfter = moment(accident.speedEndTime).tz(userTimezone).format("dddd, MMMM DD, YYYY hh:mm:ss A"),
                 displayTimezone = moment.tz(new Date(), userTimezone).format("z"),
-                displayString = "<h1>" + state.translate('Device Information') + "</h1>" +
-                        "<div id='vehicleName'><b>" + state.translate('Vehicle Name:') + "</b> " + htmlEscape(currentDevice.name) + "</div>" +
-                        "<div id='vehicleDriver'><b>" + state.translate('Driver:') + "</b> " + htmlEscape(accident.driver) + "</div>";
+                displayString = "<h1>Device Information</h1>" +
+                        "<div id='vehicleName'><b>Vehicle Name:</b> " + htmlEscape(currentDevice.name) + "</div>" +
+                        "<div id='vehicleDriver'><b>Driver:</b> " + htmlEscape(accident.driver) + "</div>";
 
             if (currentDevice.vehicleIdentificationNumber && currentDevice.vehicleIdentificationNumber === "") {
-                displayString += "<div id='vehicleInfo'><b>" + state.translate('VIN/Vehicle :') + "</b>" + state.translate(' There was no VIN information for this vehicle.') + "</div>";
+                displayString += "<div id='vehicleInfo'><b>VIN/Vehicle:</b> There was no VIN information for this vehicle.</div>";
             } else {
-                displayString += "<div id='vehicleVin'><b>" + state.translate('VIN:' + "</b> " + htmlEscape(currentDevice.vehicleIdentificationNumber) + "</div>";
+                displayString += "<div id='vehicleVin'><b>VIN:</b> " + htmlEscape(currentDevice.vehicleIdentificationNumber) + "</div>";
                 if (vin.error === "None") {
-                    displayString += "<div id='vehicleInfo'><b>" + state.translate('Vehicle:') + "</b> " + htmlEscape(vin.year) + " " + htmlEscape(vin.make) + " " + htmlEscape(vin.model) + "</div>";
+                    displayString += "<div id='vehicleInfo'><b>Vehicle:</b> " + htmlEscape(vin.year) + " " + htmlEscape(vin.make) + " " + htmlEscape(vin.model) + "</div>";
                 }
                 else {
-                    displayString += "<div id='vehicleInfo'><b>" + state.translate('Vehicle:') + "</b>" + state.translate('Vehicle information could not be processed.') + "</div>";
+                    displayString += "<div id='vehicleInfo'><b>Vehicle:</b> Vehicle information could not be processed.</div>";
                 }
             }
             
 
-            displayString += "<div id='dateOfAccident'><b>" + state.translate('Time of Collision:') + "</b> " + accidentDateTime + "</div>" +
+            displayString += "<div id='dateOfAccident'><b>Time of Collision:</b> " + accidentDateTime + "</div>" +
                     "<div id='vehicleImage' style='width:95%;max-width:750px;'>" + accident.imageString + "</div>" +
-                    "<div id='vehicleTripHistory'><h1>" + state.translate('Map View') + "</h1>";
+                    "<div id='vehicleTripHistory'><h1>Map View</h1>";
 
             if (accident.trip !== "Unknown") {
                 displayString += "<p><a href=https://" + credentials.server + "/" + credentials.database + "/#tripsHistory,dateRange:(endDate:'" + accidentDateAfterArr[0] +
                         "T03:59:59.000Z',startDate:'" + accidentDateArr[0] + "T04:00:00.000Z'),devices:!(" + currentDevice.id +
-                        "),routes:(" + currentDevice.id + ":!((start:'" + accident.tripStart + "',stop:'" + accident.tripEnd + "'))) target=_blank>" + state.translate('Trip History') + "</a></p>";
+                        "),routes:(" + currentDevice.id + ":!((start:'" + accident.tripStart + "',stop:'" + accident.tripEnd + "'))) target=_blank>Trip History</a></p>";
             } else {
-                displayString += "<p>" + state.translate('Trip history is unknown.') + "</p>";
+                displayString += "<p>Trip history is unknown.</p>";
             }
 
             if (accident.longitude && accident.latitude) {
                 displayString += "<div id='vehicleTripHistoryMap' style='width:95%;max-width:750px;height:" + mapHeight + ";max-height:550px;'></div></div>" +
-                        "<div id='vehicleSpeed'><h1>" + state.translate('Speed Data') + "</h1><b>" state.translate('Speed at Collision:') + "</b> " + (isMetric ? accident.speed + " " + state.translate('km/h') + : (accident.speed * 0.621371192) + " " + state.translate('mph') +
+                        "<div id='vehicleSpeed'><h1>Speed Data</h1><b>Speed at Collision:</b> " + (isMetric ? accident.speed + " Km/h" : (accident.speed * 0.621371192) + " Mph") +
                         "<p><a href=https://" + credentials.server + "/" + credentials.database + "/#speedProfile,dateRange:(endDate:'" + accident.speedEndTime +
                         "',startDate:'" + accident.speedStartTime + "'),device:" + currentDevice.id + " target=_blank>Speed Profile</a></p>" +
                         "<p><b>Graph Start:</b> " + accidentThirtyBefore + "<br><b>Time of Collision:</b> " + accidentDateTime + "<br><b>Graph End:</b> " + accidentThirtyAfter + "</p></div>";
