@@ -67,10 +67,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
 			document.getElementById("select-vehicle-type-truck").textContent = state.translate('Truck');
 			document.getElementById("startLabel").textContent = state.translate('Start date');
 			document.getElementById("endLabel").textContent = state.translate('End date');
-			
-			/* searchButton.textContent = state.translate('Find Latest Collision');
-			showHistoricDevices.textContent = state.translate('Show Historic Devices'); */
-			
+			accidentWeb.textContent = state.translate('Enter vehicle name...');
 			
             var now = new Date(),
                 dd = now.getDate(),
@@ -104,9 +101,9 @@ geotab.addin.collisionReconstruction = function (api, state) {
             userInputVehicleType = vehicleType.options[vehicleType.selectedIndex].getAttribute("data-value");
 
             if (deviceId === null) {
-                document.getElementById("results").innerHTML = "<div class='error'>Please select a vehicle.</div>";
+                document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('Please select a vehicle.') + "</div>";
             } else if (dateFrom > dateTo) {
-                document.getElementById("results").innerHTML = "<div class='error'>The start date cannot be after the end date.</div>";
+                document.getElementById("results").innerHTML = "<div class='error'>" + state.translate('The start date cannot be after the end date. Please adjust the date range.') + "</div>";
             } else {
                 showWaiting();
                 getDeviceAndVIN(deviceId);

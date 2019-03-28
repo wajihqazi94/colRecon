@@ -15,6 +15,7 @@
 	"Export To PDF": "Export To PDF",
 	"Now": "Maintenant",
 	"Done": "Complet",
+	"Please select a vehicle.": "Sélectionnez un véhicule.",
 	"The start date cannot be after the end date. Please adjust the date range.": "La date de début ne peut pas être après la date de fin. Veuillez ajuster la plage de dates.",
 	"Information about this vehicle could not be found.": "L’information sur ce véhicule est introuvable.",
 	"There is no VIN information for the selected vehicle. Please select a vehicle type and try again.": "Il n’y a aucune information sur le NIV pour le véhicule sélectionné. Veuillez sélectionner un type de véhicule et réessayer.",
