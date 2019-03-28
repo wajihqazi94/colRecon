@@ -643,7 +643,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
 
             if (accident.longitude && accident.latitude) {
                 displayString += "<div id='vehicleTripHistoryMap' style='width:95%;max-width:750px;height:" + mapHeight + ";max-height:550px;'></div></div>" +
-                        "<div id='vehicleSpeed'><h1>" + state.translate('Speed Data') + "</h1><b>" state.translate('Speed at Collision:') + "</b> " + (isMetric ? accident.speed + " " + state.translate('km/h') : (accident.speed * 0.621371192) + " " + state.translate('mph')) + "<p><a href=https://" + credentials.server + "/" + credentials.database + "/#speedProfile,dateRange:(endDate:'" + accident.speedEndTime +
+                        "<div id='vehicleSpeed'><h1>" + state.translate('Speed Data') + "</h1><b>" + state.translate('Speed at Collision:') + "</b> " + (isMetric ? accident.speed + " " + state.translate('km/h') : (accident.speed * 0.621371192) + " " + state.translate('mph')) + "<p><a href=https://" + credentials.server + "/" + credentials.database + "/#speedProfile,dateRange:(endDate:'" + accident.speedEndTime +
                         "',startDate:'" + accident.speedStartTime + "'),device:" + currentDevice.id + " target=_blank>Speed Profile</a></p>" +
                         "<p><b>Graph Start:</b> " + accidentThirtyBefore + "<br><b>Time of Collision:</b> " + accidentDateTime + "<br><b>Graph End:</b> " + accidentThirtyAfter + "</p></div>";
             } else {
