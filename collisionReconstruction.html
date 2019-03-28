@@ -18,7 +18,7 @@
     <div class="options-container no-print" id="options-container">
         <div id="input-vehicle" class="input-fields">
             <p>
-                <label for="deviceId">Vehicle</label>
+                <label for="deviceId" id="vehicleLabel">Vehicle</label>
                 <input id="deviceId" type="text" name="q" placeholder="Start typing vehicle name ...">
             </p>
             <p>
@@ -28,7 +28,7 @@
         </div>
 
         <div id="input-vehicle-type" class="input-fields">
-            <label for="select-vehicle-type">Select Vehicle Type</label>
+            <label for="select-vehicle-type" id="selectVehicleLabel">Select Vehicle Type</label>
             <select id="select-vehicle-type">
                 <option id="select-vehicle-type-none" selected="selected" data-value="none">Let Geotab Decide</option>
                 <option id="select-vehicle-type-car" data-value="Car">Car</option>
@@ -40,11 +40,11 @@
 
         <div id="input-dates" class="input-fields">
             <p>
-                <label for="input-start-date">Start date</label>
+                <label for="input-start-date" id="startLabel">Start date</label>
                 <br><input id="input-start-date"/>
             </p>
             <p>
-                <label for="input-end-date">End date</label>
+                <label for="input-end-date" id="endLabel">End date</label>
                 <input id="input-end-date"/>
             </p>
         </div>

@@ -58,8 +58,20 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 credentials.server = server;
             });
 			document.title = state.translate('Collision Reconstruction (BETA)');
+			document.getElementById("vehicleLabel").textContent = state.translate('Vehicle');
+			document.getElementById("selectVehicleLabel").textContent = state.translate('Select Vehicle Type');
+			document.getElementById("select-vehicle-type-none").textContent = state.translate('Let Geotab Decide');
+			document.getElementById("select-vehicle-type-car").textContent = state.translate('Car');
+			document.getElementById("select-vehicle-type-van").textContent = state.translate('Van');
+			document.getElementById("select-vehicle-type-pickup").textContent = state.translate('Pickup');
+			document.getElementById("select-vehicle-type-truck").textContent = state.translate('Truck');
+			document.getElementById("startLabel").textContent = state.translate('Start date');
+			document.getElementById("endLabel").textContent = state.translate('End date');
+			
 			searchButton.textContent = state.translate('Find Latest Collision');
-
+			showHistoricDevices.textContent = state.translate('Show Historic Devices');
+			
+			
             var now = new Date(),
                 dd = now.getDate(),
                 mm = now.getMonth() + 1,
