@@ -1,0 +1,19 @@
+{
+  "name": "collisionReconstruction",
+  "supportEmail": "support@geotab.com",
+  "version": "0.0.1",
+  "items": [{
+    "url": "collisionReconstruction.html",
+    "path": "ActivityLink/",
+    "menuName": {
+      "en": "collisionReconstruction"
+    },
+    "icon": "images/icon.svg"
+  }],
+  "dev": {
+    "root": "collisionReconstruction",
+    "dist": {
+      "host": "https://www.example.com/myaddin/"
+    }
+  }
+}

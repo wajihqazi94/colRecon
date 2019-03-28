@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Collision Reconstruction</title>
+    <link rel="stylesheet" href="styles/auto-complete.css"/>
+    <link rel="stylesheet" href="styles/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="styles/jquery-ui-timepicker-addon.css"/>
+    <link rel="stylesheet" href="styles/mapbox.css" />
+    <link rel="stylesheet" href="styles/leaflet.css" />
+    <link rel="stylesheet" href="styles/index.css"/>
+	<link rel="stylesheet" href="styles/print.css"/>
+</head>
+<body>
+
+<div id="collisionReconstruction">
+    <div class="options-container no-print" id="options-container">
+        <div id="input-vehicle" class="input-fields">
+            <p>
+                <label for="deviceId">Vehicle</label>
+                <input id="deviceId" type="text" name="q" placeholder="Start typing vehicle name ...">
+            </p>
+            <p>
+                <input type="checkbox" id="showHistoricDevices" class="geotabSwitchButton"/>
+                <label class="geotabButton" id="showHistoricDevices-button" for="showHistoricDevices">Show Historic Devices</label>
+            </p>
+        </div>
+
+        <div id="input-vehicle-type" class="input-fields">
+            <label for="select-vehicle-type">Select Vehicle Type</label>
+            <select id="select-vehicle-type">
+                <option id="select-vehicle-type-none" selected="selected" data-value="none">Let Geotab Decide</option>
+                <option id="select-vehicle-type-car" data-value="Car">Car</option>
+                <option id="select-vehicle-type-van" data-value="Van">Van</option>
+                <option id="select-vehicle-type-pickup" data-value="Pickup">Pickup</option>
+                <option id="select-vehicle-type-truck" data-value="Truck">Truck</option>
+            </select>
+        </div>
+
+        <div id="input-dates" class="input-fields">
+            <p>
+                <label for="input-start-date">Start date</label>
+                <br><input id="input-start-date"/>
+            </p>
+            <p>
+                <label for="input-end-date">End date</label>
+                <input id="input-end-date"/>
+            </p>
+        </div>
+
+        <div id="input-button" class="input-fields">
+            <p>
+                <button class="geotabButton" id="collisionReconstructionSearchButton">Find Latest Collision</button>
+            </p>
+			
+			<p>
+			  <button class="geotabButton" id="collisionReconstructionExportPdfButton">Export To PDF</button>
+			</p>
+        </div>
+    </div>
+    <div id="collisionReconstructionMain">
+        <div class="geotabPageHeader">
+            <h1 class="geotabPageName">Collision Reconstruction (BETA)</h1>
+        </div>
+        <div id="waiting">
+            <svg width='94px' height='94px' viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-default">
+                <rect x="0" y="0" width="100" height="100" fill="none" class="bk"/>
+                <rect id="waiting0" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(0 50 50) translate(0 -30)'/>
+                <rect id="waiting1" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(30 50 50) translate(0 -30)'/>
+                <rect id="waiting2" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(60 50 50) translate(0 -30)'/>
+                <rect id="waiting3" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(90 50 50) translate(0 -30)'/>
+                <rect id="waiting4" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(120 50 50) translate(0 -30)'/>
+                <rect id="waiting5" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(150 50 50) translate(0 -30)'/>
+                <rect id="waiting6" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(180 50 50) translate(0 -30)'/>
+                <rect id="waiting7" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(210 50 50) translate(0 -30)'/>
+                <rect id="waiting8" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(240 50 50) translate(0 -30)'/>
+                <rect id="waiting9" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(270 50 50) translate(0 -30)'/>
+                <rect id="waiting10" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(300 50 50) translate(0 -30)'/>
+                <rect id="waiting11" class="waiting" x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#00b2ff' transform='rotate(330 50 50) translate(0 -30)'/>
+            </svg>
+        </div>
+        <div id="results"></div>
+    </div>
+</div>
+<script type="text/javascript" src="scripts/collisionReconstruction.js"></script>
+<script type="text/javascript" src="scripts/moment.js"></script>
+<script type="text/javascript" src="scripts/moment-timezone-with-data.js"></script>
+<script type="text/javascript" src="scripts/auto-complete.js"></script>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="scripts/mapbox.js"></script>
+</body>
+</html>
