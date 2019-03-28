@@ -1,5 +1,5 @@
 {
-	"title": "Reconstitution des collisions (BÊTA)",
+	"Collision Reconstruction (BETA)": "Reconstitution des collisions (BÊTA)",
 	"vehicleLabel": "Véhicule",
 	"vehicleSelect": "Nom du véhicule...",
 	"typeLabel": "Sélectionner le type de véhicule",
@@ -11,7 +11,7 @@
 	"truck": "Camion",
 	"startDate": "Date de début",
 	"endDate": "Date de fin",
-	"findCollision": "Trouver la dernière collision",
+	"Find Latest Collision": "Trouver la dernière collision",
 	"exportPDF": "",
 	"now": "Maintenant",
 	"done": "Complet",

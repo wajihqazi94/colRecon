@@ -57,8 +57,8 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 credentials.database = session.database;
                 credentials.server = server;
             });
-			document.title = state.translate('title');
-			searchButton.textContent = state.translate('findCollision');
+			document.title = state.translate('Collision Reconstruction (BETA)');
+			searchButton.textContent = state.translate('Find Latest Collision');
 
             var now = new Date(),
                 dd = now.getDate(),
