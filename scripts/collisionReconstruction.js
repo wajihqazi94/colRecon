@@ -619,12 +619,12 @@ geotab.addin.collisionReconstruction = function (api, state) {
             if (currentDevice.vehicleIdentificationNumber && currentDevice.vehicleIdentificationNumber === "") {
                 displayString += "<div id='vehicleInfo'><b>" + state.translate('VIN/Vehicle :') + "</b>" + state.translate(' There was no VIN information for this vehicle.') + "</div>";
             } else {
-                displayString += "<div id='vehicleVin'><b>" + state.translate('VIN:') + "</b> " + htmlEscape(currentDevice.vehicleIdentificationNumber) + "</div>";
+                displayString += "<div id='vehicleVin'><b>" + state.translate('VIN') + ": " + "</b> " + htmlEscape(currentDevice.vehicleIdentificationNumber) + "</div>";
                 if (vin.error === "None") {
-                    displayString += "<div id='vehicleInfo'><b>" + state.translate('Vehicle:') + "</b> " + htmlEscape(vin.year) + " " + htmlEscape(vin.make) + " " + htmlEscape(vin.model) + "</div>";
+                    displayString += "<div id='vehicleInfo'><b>" + state.translate('Vehicle') + ": " + "</b> " + htmlEscape(vin.year) + " " + htmlEscape(vin.make) + " " + htmlEscape(vin.model) + "</div>";
                 }
                 else {
-                    displayString += "<div id='vehicleInfo'><b>" + state.translate('Vehicle:') + "</b>" + state.translate('Vehicle information could not be processed.') + "</div>";
+                    displayString += "<div id='vehicleInfo'><b>" + state.translate('Vehicle') + ": " + "</b>" + state.translate('Vehicle information could not be processed.') + "</div>";
                 }
             }
             
@@ -645,24 +645,23 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 displayString += "<div id='vehicleTripHistoryMap' style='width:95%;max-width:750px;height:" + mapHeight + ";max-height:550px;'></div></div>" +
                         "<div id='vehicleSpeed'><h1>" + state.translate('Speed Data') + "</h1><b>" + state.translate('Speed at Collision:') + "</b> " + (isMetric ? accident.speed + " " + state.translate('km/h') : (accident.speed * 0.621371192) + " " + state.translate('mph')) + "<p><a href=https://" + credentials.server + "/" + credentials.database + "/#speedProfile,dateRange:(endDate:'" + accident.speedEndTime +
                         "',startDate:'" + accident.speedStartTime + "'),device:" + currentDevice.id + " target=_blank>Speed Profile</a></p>" +
-                        "<p><b>Graph Start:</b> " + accidentThirtyBefore + "<br><b>Time of Collision:</b> " + accidentDateTime + "<br><b>Graph End:</b> " + accidentThirtyAfter + "</p></div>";
+                        "<p><b>Graph Start:</b> " + accidentThirtyBefore + "<br><b>" + state.translate('Time of Collision:') + "</b> " + accidentDateTime + "<br><b>" + state.translate('Graph End:') + "</b> " + accidentThirtyAfter + "</p></div>";
             } else {
                 displayString += "<p>Accident location is unknown.</p></div>" +
-                        "<div id='vehicleSpeed'><h1>Speed Data</h1><b>Speed at Collision:</b> " + accident.speed + "</div>";
+                        "<div id='vehicleSpeed'><h1>" + state.translate('Speed Data') + "</h1><b>" + state.translate('Speed at Moment of Collision:') + "</b> " + accident.speed + "</div>";
             }
 
-            displayString += "<div id='vehicleRPM'><h1>RPM Data</h1>" +
-                    "<p><a href=https://" + credentials.server + "/" + credentials.database + "/#engineDataProfile,dateRange:(endDate:'" + accident.speedEndTime +
-                    "',startDate:'" + accident.speedStartTime + "'),device:!(" + currentDevice.id + "),diagnostic:!(DiagnosticEngineSpeedId),showVehicleSpeed:!f target=_blank>RPM Graph</a></p>" +
-                    "<p><b>Graph Start:</b> " + accidentThirtyBefore + "<br><b>Time of Collision:</b> " + accidentDateTime + "<br><b>Graph End:</b> " + accidentThirtyAfter + "</p></div>" +
-                    "<div id='vehicleAccelerometer'><h1>Accelerometer Data</h1><b>Forward and Braking:</b> " + (isMetric ? (accident.x).toFixed(5) + " m/s^2" : (accident.x * 3.28084).toFixed(5) + " ft/s^2") +
-                    "<br><b>Side to Side:</b> " + (isMetric ? (accident.y).toFixed(5) + " m/s^2" : (accident.y * 3.28084).toFixed(5) + " ft/s^2") +
-                    "<p><a href=https://" + credentials.server + "/" + credentials.database + "/#engineDataProfile,dateRange:(endDate:'" + accident.speedEndTime +
-                    "',startDate:'" + accident.speedStartTime + "'),device:!(" + currentDevice.id + "),diagnostic:!(DiagnosticAccelerationForwardBrakingId,DiagnosticAccelerationSideToSideId),showVehicleSpeed:!f target=_blank>Accelerometer Graph</a></p>" +
-                    "<p><b>Graph Start:</b> " + accidentThirtyBefore + "<br><b>Time of Collision:</b> " + accidentDateTime + "<br><b>Graph End:</b> " + accidentThirtyAfter + "</p></div>" +
-                    "<div id='errorMargins'><h1>Margin of Error</h1><p>GPS coordinates are accurate to " + (isMetric ? "2.5 Meters" : "8.2 Feet") + "<br>Speed is accurate to " + (isMetric ? "3.6 km/h" : "2.2 mi/h") + "<br>Point of impact is an estimate based on calculated angle from accelerometer axis and may vary</div>" +
-                    "<div id='disclaimer'><h1>Disclaimer</h1><p>The preceding report is for illustrative purposes only. The report has been assembled automatically using data reported by a GO device by software in BETA release.  There are many ways in which automatically generated reports can be in error. Some directly measured quantities in the report, such as acceleration, speed, and GPS location, are subject to their usual uncertainties and measurement errors. Derived quantities, such as point of impact, are also subject to potential calculation errors. The vehicle image displayed in the document is a generic image of the vehicle type, it does not serve to portray an accurate image of the exact vehicle or any additions/modifications done to the vehicle such as trailers, this image can also be edited by the user generating the report. The software is still in development and performance characteristics remain uncertain. Accordingly, the report may serve as a starting point for your investigation of an incident, but <i><u>no conclusions should be drawn from it</u></i> without a trained, Geotab expert to interpret it.</p></div>" +
-                    "<div id='timedisclaimer'>All times are in " + htmlEscape(displayTimezone) + " ( " + htmlEscape(userTimezone) + " ).</div>";
+            displayString += "<div id='vehicleRPM'><h1>" + state.translate('RPM Data') + "</h1>" +
+			"<p><a href=https://" + credentials.server + "/" + credentials.database + "/#engineDataProfile,dateRange:(endDate:'" + accident.speedEndTime +
+			"',startDate:'" + accident.speedStartTime + "'),device:!(" + currentDevice.id + "),diagnostic:!(DiagnosticEngineSpeedId),showVehicleSpeed:!f target=_blank>RPM Graph</a></p>" +
+			"<p><b>" + state.translate('Graph Start:') + "</b> " + accidentThirtyBefore + "<br><b>" + state.translate('Time of Collision:') + "</b> " + accidentDateTime + "<br><b>" + state.translate('Graph End:') + "</b> " + accidentThirtyAfter + "</p></div>" +
+			"<div id='vehicleAccelerometer'><h1>" + state.translate('Accelerometer Data') + "</h1><b>" + state.translate('Forward and Braking:') + "</b> " + (isMetric ? (accident.x).toFixed(5) + " " + state.translate('m/s^2') : (accident.x * 3.28084).toFixed(5) + " " + state.translate('ft/s^2')) +
+			"<br><b>" + state.translate('Side to Side:') + "</b> " + (isMetric ? (accident.y).toFixed(5) + " " + state.translate('m/s^2') : (accident.y * 3.28084).toFixed(5) + " " + state.translate('ft/s^2')) +
+			"<p><a href=https://" + credentials.server + "/" + credentials.database + "/#engineDataProfile,dateRange:(endDate:'" + accident.speedEndTime +
+			"',startDate:'" + accident.speedStartTime + "'),device:!(" + currentDevice.id + "),diagnostic:!(DiagnosticAccelerationForwardBrakingId,DiagnosticAccelerationSideToSideId),showVehicleSpeed:!f target=_blank>" + state.translate('Accelerometer Graph') + "</a></p>" +
+			"<p><b>" + state.translate('Graph Start:') + "</b> " + accidentThirtyBefore + "<br><b>" + state.translate('Time of Collision:') + "</b> " + accidentDateTime + "<br><b>" + state.translate('Graph End:') + "</b> " + accidentThirtyAfter + "</p></div>" +
+			"<div id='errorMargins'><h1>" + state.translate('Margin of Error') + "</h1><p>" + state.translate('GPS coordinates are accurate to ') + (isMetric ? "2.5 " + state.translate('meters') : "8.2 " + state.translate('feet')) + "<br>" + state.translate('Speed is accurate to ') + (isMetric ? "3.6 " + state.translate('km/h') : "2.2 " + state.translate('mph')) + "<br>" + state.translate('Point of impact is an estimate based on calculated angle from accelerometer axis and may vary') + "</div>" +
+			"<div id='disclaimer'><h1>" + state.translate('Disclaimer') + "</h1><p>" + state.translate('The preceding report is for illustrative purposes only. The report has been assembled automatically using data reported by a GO device. There are many ways in which automatically-generated reports can be erroneous. Some directly measured quantities in the report, such as acceleration, speed, and GPS location, are subject to their usual uncertainties and measurement errors. Derived quantities, such as the point of impact, are also subject to potential calculation errors. The vehicle image displayed in the document is a generic image of a vehicle and does not serve to portray an accurate image of the exact vehicle or any additions/modifications done to the vehicle such as trailers. This image can also be edited by the user generating the report. This software is still in development and performance characteristics remain uncertain. Accordingly, the report may serve as a starting point for your investigation of an incident, but no conclusions should be drawn from it without a trained Geotab expert to interpret it.') + "</p></div>" + "<div id='timedisclaimer'>" + state.translate('All times are in ') + htmlEscape(displayTimezone) + " ( " + htmlEscape(userTimezone) + " ).</div>";
 
             hideWaiting();
             document.getElementById("results").innerHTML = displayString;
@@ -677,7 +676,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 L.mapbox.styleLayer("mapbox://styles/mapbox/streets-v10").addTo(map);
 
                 var marker = L.marker([accident.latitude, accident.longitude]).addTo(map)
-                    .bindPopup("<b>Time of Collision</b><br> " + accidentDateTime + "<br><br><b>Location</b><br> " + accident.address)
+                    .bindPopup("<b>" + state.translate('Time of Collision') + "</b><br> " + accidentDateTime + "<br><br><b>" + state.translate('Location') +"</b><br> " + accident.address)
                     .openPopup();
             }
         },
