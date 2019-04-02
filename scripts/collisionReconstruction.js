@@ -610,14 +610,14 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 accidentDateAfterArr = (accident.dayAfter) ? accident.dayAfter.split("T") : [],
                 accidentDateTime = moment(accident.dateTime).tz(userTimezone).format("dddd, MMMM DD, YYYY hh:mm:ss a"),
                 accidentThirtyBefore = moment(accident.speedStartTime).tz(userTimezone).format("dddd, MMMM DD, YYYY hh:mm:ss a"),
-                accidentThirtyAfter = moment(accident.speedEndTime).tz(userTimezone).format("dddd, MMMM DD, YYYY hh:mm:ss A"),
+                accidentThirtyAfter = moment(accident.speedEndTime).tz(userTimezone).format("dddd, MMMM DD, YYYY hh:mm:ss a"),
                 displayTimezone = moment.tz(new Date(), userTimezone).format("z"),
                 displayString = "<h1>" + state.translate('Device Information') + "</h1>" +
                         "<div id='vehicleName'><b>" + state.translate('Vehicle Name:') + "</b> " + htmlEscape(currentDevice.name) + "</div>" +
                         "<div id='vehicleDriver'><b>" + state.translate('Driver:') + "</b> " + htmlEscape(accident.driver) + "</div>";
 
             if (currentDevice.vehicleIdentificationNumber && currentDevice.vehicleIdentificationNumber === "") {
-                displayString += "<div id='vehicleInfo'><b>" + state.translate('VIN/Vehicle :') + "</b>" + state.translate(' There was no VIN information for this vehicle.') + "</div>";
+                displayString += "<div id='vehicleInfo'><b>" + state.translate('VIN/Vehicle :') + "</b>" + state.translate('There was no VIN information for this vehicle.') + "</div>";
             } else {
                 displayString += "<div id='vehicleVin'><b>" + state.translate('VIN') + ": " + "</b> " + htmlEscape(currentDevice.vehicleIdentificationNumber) + "</div>";
                 if (vin.error === "None") {
@@ -643,11 +643,11 @@ geotab.addin.collisionReconstruction = function (api, state) {
 
             if (accident.longitude && accident.latitude) {
                 displayString += "<div id='vehicleTripHistoryMap' style='width:95%;max-width:750px;height:" + mapHeight + ";max-height:550px;'></div></div>" +
-                        "<div id='vehicleSpeed'><h1>" + state.translate('Speed Data') + "</h1><b>" + state.translate('Speed at Collision:') + "</b> " + (isMetric ? accident.speed + " " + state.translate('km/h') : (accident.speed * 0.621371192) + " " + state.translate('mph')) + "<p><a href=https://" + credentials.server + "/" + credentials.database + "/#speedProfile,dateRange:(endDate:'" + accident.speedEndTime +
-                        "',startDate:'" + accident.speedStartTime + "'),device:" + currentDevice.id + " target=_blank>Speed Profile</a></p>" +
-                        "<p><b>Graph Start:</b> " + accidentThirtyBefore + "<br><b>" + state.translate('Time of Collision:') + "</b> " + accidentDateTime + "<br><b>" + state.translate('Graph End:') + "</b> " + accidentThirtyAfter + "</p></div>";
+                        "<div id='vehicleSpeed'><h1>" + state.translate('Speed Data') + "</h1><b>" + state.translate('Speed at Moment of Collision:') + "</b> " + (isMetric ? accident.speed + " " + state.translate('km/h') : (accident.speed * 0.621371192) + " " + state.translate('mph')) + "<p><a href=https://" + credentials.server + "/" + credentials.database + "/#speedProfile,dateRange:(endDate:'" + accident.speedEndTime +
+                        "',startDate:'" + accident.speedStartTime + "'),device:" + currentDevice.id + " target=_blank>" + state.translate('Speed Profile') + "</a></p>" +
+                        "<p><b>" + state.translate('Graph Start:') + "</b> " + accidentThirtyBefore + "<br><b>" + state.translate('Time of Collision:') + "</b> " + accidentDateTime + "<br><b>" + state.translate('Graph End:') + "</b> " + accidentThirtyAfter + "</p></div>";
             } else {
-                displayString += "<p>Accident location is unknown.</p></div>" +
+                displayString += "<p>" + state.translate('Accident location is unknown.') + "</p></div>" +
                         "<div id='vehicleSpeed'><h1>" + state.translate('Speed Data') + "</h1><b>" + state.translate('Speed at Moment of Collision:') + "</b> " + accident.speed + "</div>";
             }
 
@@ -661,7 +661,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
 			"',startDate:'" + accident.speedStartTime + "'),device:!(" + currentDevice.id + "),diagnostic:!(DiagnosticAccelerationForwardBrakingId,DiagnosticAccelerationSideToSideId),showVehicleSpeed:!f target=_blank>" + state.translate('Accelerometer Graph') + "</a></p>" +
 			"<p><b>" + state.translate('Graph Start:') + "</b> " + accidentThirtyBefore + "<br><b>" + state.translate('Time of Collision:') + "</b> " + accidentDateTime + "<br><b>" + state.translate('Graph End:') + "</b> " + accidentThirtyAfter + "</p></div>" +
 			"<div id='errorMargins'><h1>" + state.translate('Margin of Error') + "</h1><p>" + state.translate('GPS coordinates are accurate to ') + (isMetric ? "2.5 " + state.translate('meters') : "8.2 " + state.translate('feet')) + "<br>" + state.translate('Speed is accurate to ') + (isMetric ? "3.6 " + state.translate('km/h') : "2.2 " + state.translate('mph')) + "<br>" + state.translate('Point of impact is an estimate based on calculated angle from accelerometer axis and may vary') + "</div>" +
-			"<div id='disclaimer'><h1>" + state.translate('Disclaimer') + "</h1><p>" + state.translate('The preceding report is for illustrative purposes only. The report has been assembled automatically using data reported by a GO device. There are many ways in which automatically-generated reports can be erroneous. Some directly measured quantities in the report, such as acceleration, speed, and GPS location, are subject to their usual uncertainties and measurement errors. Derived quantities, such as the point of impact, are also subject to potential calculation errors. The vehicle image displayed in the document is a generic image of a vehicle and does not serve to portray an accurate image of the exact vehicle or any additions/modifications done to the vehicle such as trailers. This image can also be edited by the user generating the report. This software is still in development and performance characteristics remain uncertain. Accordingly, the report may serve as a starting point for your investigation of an incident, but no conclusions should be drawn from it without a trained Geotab expert to interpret it.') + "</p></div>" + "<div id='timedisclaimer'>" + state.translate('All times are in ') + htmlEscape(displayTimezone) + " ( " + htmlEscape(userTimezone) + " ).</div>";
+			"<div id='disclaimer'><h1>" + state.translate('Disclaimer') + "</h1><p>" + state.translate('The preceding report is for illustrative purposes only. The report has been assembled automatically using data reported by a GO device. There are many ways in which automatically-generated reports can be erroneous. Some directly measured quantities in the report, such as acceleration, speed, and GPS location, are subject to their usual uncertainties and measurement errors. Derived quantities, such as the point of impact, are also subject to potential calculation errors. The vehicle image displayed in the document is a generic image of a vehicle and does not serve to portray an accurate image of the exact vehicle or any additions/modifications done to the vehicle such as trailers. This image can also be edited by the user generating the report. This software is still in development and performance characteristics remain uncertain. Accordingly, the report may serve as a starting point for your investigation of an incident, but no conclusions should be drawn from it without a trained Geotab expert to interpret it.') + "</p></div>" + "<div id='timedisclaimer'>" + state.translate('All times are in ') + " " + htmlEscape(displayTimezone) + " ( " + htmlEscape(userTimezone) + " ).</div>";
 
             hideWaiting();
             document.getElementById("results").innerHTML = displayString;
