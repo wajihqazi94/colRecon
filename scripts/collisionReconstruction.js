@@ -441,6 +441,8 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 }
             }, function (result) {
                 if (result.length === 0) {
+					datePickerStart.regional['ru'];
+					datePickerEnd.regional['ru'];
                     accident.driver = state.translate('Unknown Driver');
                     displayResults();
                     return;
