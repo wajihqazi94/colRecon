@@ -441,8 +441,18 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 }
             }, function (result) {
                 if (result.length === 0) {
-					datePickerStart.regional['ru'];
-					datePickerEnd.regional['ru'];
+					$("#input-start-date").datetimepicker(
+						$.timepicker.regional['es'];
+					)
+					$("#input-start-date").datetimepicker(
+						$.datepicker.regional['es'];
+					)
+					$("#input-end-date").datetimepicker(
+						$.timepicker.regional['es'];
+					)
+					$("#input-end-date").datetimepicker(
+						$.datepicker.regional['es'];
+					)
                     accident.driver = state.translate('Unknown Driver');
                     displayResults();
                     return;
