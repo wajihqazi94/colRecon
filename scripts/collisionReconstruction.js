@@ -28,6 +28,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
             changeYear: true,
             changeMonth: true,
             showOtherMonths: true,
+			regional: 'ru',
             beforeShow: function (input, inst) {
                 var rect = input.getBoundingClientRect();
                 setTimeout(function () {
