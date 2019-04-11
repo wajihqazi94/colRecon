@@ -348,7 +348,14 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 i;
 
             for (i = 0; i < arrLength; i += 1) {
-                currentTotal = Math.abs(xArray[i].data) + Math.abs(yArray[i].data);
+				var yValue;
+				if (Math.abs(yArray[i].data)) {
+					yValue = Math.abs(yArray[i].data);
+				}
+				else {
+					yValue = 0;
+				}
+                currentTotal = Math.abs(xArray[i].data) + yValue;
 
                 if (currentTotal > total) {
                     total = currentTotal;
@@ -441,18 +448,6 @@ geotab.addin.collisionReconstruction = function (api, state) {
                 }
             }, function (result) {
                 if (result.length === 0) {
-					$("#input-start-date").timepicker(
-						$.timepicker.regional['es'];
-					)
-					$("#input-start-date").datepicker(
-						$.datepicker.regional['es'];
-					)
-					$("#input-end-date").timepicker(
-						$.timepicker.regional['es'];
-					)
-					$("#input-end-date").datepicker(
-						$.datepicker.regional['es'];
-					)
                     accident.driver = state.translate('Unknown Driver');
                     displayResults();
                     return;
