@@ -349,7 +349,7 @@ geotab.addin.collisionReconstruction = function (api, state) {
 
             for (i = 0; i < arrLength; i += 1) {
 				var yValue;
-				if (Math.abs(yArray[i])) {
+				if (Math.abs(yArray[i].data)) {
 					yValue = Math.abs(yArray[i].data);
 				}
 				else {
